@@ -1,7 +1,8 @@
 def is_year_leap(num):
-    return True if num % 4 == 0 else False
+    return num % 4 == 0
 
 
-year = 2023
+year = int(input('Введите номер года: '))
 result = is_year_leap(year)
-print(f'год {year}: {result}')
+
+print(f"год {year}: {result}")

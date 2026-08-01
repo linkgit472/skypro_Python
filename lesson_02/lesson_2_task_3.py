@@ -2,8 +2,7 @@ import math
 
 
 def square(a):
-    s = a*a
-    return math.ceil(s)
+    return math.ceil(a*a)
 
 
 print(square(3))
