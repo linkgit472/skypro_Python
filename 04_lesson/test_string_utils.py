@@ -8,7 +8,7 @@ string = StringUtils()
     ('skypro', 'Skypro'),
     ('hello', 'Hello'),
     ('hello world!', 'Hello world!'),
-    ('August 27', 'August 27')])
+    ('skyPRO', 'SkyPRO')])
 def test_capitalize_positive(input, output):
     assert string.capitalize(input) == output
 
@@ -16,16 +16,21 @@ def test_capitalize_positive(input, output):
 @pytest.mark.parametrize("input, output", [
     ('', ''),
     ('   ', '   '),
+    ('August 27', 'August 27'),
     ('27 august', '27 august')])
 def test_capitalize_negative(input, output):
     assert string.capitalize(input) == output
+
+
+def test_capitalize_negative_none():
+    with pytest.raises(AttributeError):
+        string.capitalize(None)
 
 
 @pytest.mark.parametrize("input, output", [
     (' hello', 'hello'),
     ('   Skypro', 'Skypro'),
     (' skypro ', 'skypro '),
-    ('   ', ''),
     (' hello world', 'hello world')])
 def test_trim_positive(input, output):
     assert string.trim(input) == output
@@ -33,6 +38,7 @@ def test_trim_positive(input, output):
 
 @pytest.mark.parametrize("input, output", [
     ('', ''),
+    ('   ', ''),
     ('Hello world', 'Hello world'),
     ('hello ', 'hello ')])
 def test_trim_negative(input, output):
@@ -43,18 +49,18 @@ def test_trim_negative(input, output):
     ('skypro', 'y', True),
     ('hello world', 'o', True),
     (' hello', ' ', True),
-    ('skypro', 'a', False),
-    ('', '', True),
-    ('skypro', 'S', True)
+    ('skypro', 'sky', True)
     ])
 def test_contains_positive(input, sym, output):
     assert string.contains(input, sym) == output
 
 
 @pytest.mark.parametrize("input, sym, output", [
-    ('SkyPro', '', False),
+    ('', '', True),
+    ('skypro', 'S', False),
+    ('SkyPro', '', True),
     ('', 'a', False),
-    ('skypro', 'sky', True),
+    ('skypro', 'a', False),
     ])
 def test_contains_negative(input, sym, output):
     assert string.contains(input, sym) == output
@@ -64,7 +70,6 @@ def test_contains_negative(input, sym, output):
         ('skypro', 'y', 'skpro'),
         ('hello world', 'o', 'hell wrld'),
         (' hello', ' ', 'hello'),
-        ('skypro', 'S', 'kypro'),
         ('skypro', 'sky', 'pro')
         ])
 def test_delete_symbol_positive(input, sym, output):
@@ -73,6 +78,7 @@ def test_delete_symbol_positive(input, sym, output):
 
 @pytest.mark.parametrize("input, sym, output", [
     ('skypro', 'a', 'skypro'),
+    ('skypro', 'S', 'skypro'),
     ('hello world', '', 'hello world'),
     ('', 'a', '')
     ])
