@@ -8,7 +8,7 @@ def driver():
     driver = webdriver.Chrome()
 
     yield driver
-    driver.quit
+    driver.quit()
 
 
 @pytest.fixture

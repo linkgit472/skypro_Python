@@ -16,30 +16,33 @@
 # Сохраните текущий URL.
 # Проверьте, что URL для пользователя 1 и пользователя 2 различаются.
 
+from selenium.webdriver.common.by import By
+
 
 def test_urls(driver):
     driver.get("https://gitflic.ru/")
 
     driver.add_cookie({
         "name": "SESSION",
-        "value": "MmJiZTBjNzUtNmVmOC00MzRhLWI4MjgtYWNkYWQ4NDU2MWEw",
+        "value": "M2ZiMDQ5Y2ItMTUwNy00NjQ3LThmY2QtMTE4ZTQzZjY2Nzcw",
         "domain": "gitflic.ru"
         })
     driver.refresh()
 
-    driver.get('https://gitflic.ru/user/karina-hanmun')
+    user_icon = driver.find_element(By.XPATH, "//img[@class='rounded-circle']")
+    user_icon.click()
     url_1 = driver.current_url
 
     driver.delete_all_cookies()
 
+    driver.get('https://gitflic.ru/')
     driver.add_cookie({
         "name": "SESSION",
-        "value": "MDUzNGY4NTctOTZlNi00NTJjLTkwZDEtOGJmMDFiMWYwOTFj",
+        "value": "N2Y5OTBlODQtMTA5My00NDY4LWFlY2ItN2NmYmFhNDg1YTE4",
         "domain": "gitflic.ru"
         })
     driver.refresh()
 
-    driver.get('https://gitflic.ru/user/link-gensh')
     url_2 = driver.current_url
 
     assert url_1 != url_2
