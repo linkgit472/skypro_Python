@@ -4,7 +4,10 @@ db = SubjectTable('postgresql://postgres:EgelmanKA_3009@localhost:5432/SkyPro')
 
 
 def test_get_subjects():
+    max_id = db.create_random_subject()
     result = db.get_all_subject()
+
+    db.delete(max_id)
 
     assert len(result) > 0
 
